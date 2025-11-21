@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
-<title>DezZ✘MODS_Key-GeneratorV1</title>
+<title>DezZ✘MODS_Key-Generator V.1.0</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700&display=swap" rel="stylesheet">
 
@@ -89,6 +89,7 @@
     font-weight:700;
     cursor:pointer;
   }
+  button:disabled{opacity:0.6;cursor:not-allowed}
   .btn-ghost{
     background:transparent;
     border:1px solid rgba(127,255,150,0.1);
@@ -121,10 +122,11 @@
   }
   .progress-fill{
     height: 100%;
-    width: 100%;
+    width: 0%;
     background: var(--accent);
     transition: width 1s linear;
   }
+  .note { font-size:12px; opacity:0.85; margin-top:8px; }
 </style>
 </head>
 <body>
@@ -135,16 +137,16 @@
     <!-- LEFT -->
     <div>
       <h1>𝘿𝙚𝙯𝙕✘𝙈𝙊𝘿𝙎_Key Generator</h1>
-      <p class="lead">UDATE KEY 21-11-2025 14:53                      
-Tekan GET KEY untuk menghasilkan key acak.</p>
+      <p class="lead">UPDATE KEY 21-11-2025 14:53 — Tekan GET KEY untuk menghasilkan key acak.</p>
 
       <div id="keyDisplay" class="key-display rainbow">
-        <span id="keyText">SILAHKAN KLICK GET KEY</span>
+        <span id="keyText">SILAHKAN KLIK GET KEY</span>
         <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+        <div class="note" id="timeNote"></div>
       </div>
 
       <div class="controls" style="margin-top:12px;display:flex;gap:8px;flex-wrap:wrap;">
-        <button id="pickBtn">GET KEY</button>
+        <button id="pickBtn">GET KEY (Premium)</button>
         <button id="copyBtn">COPY</button>
         <button id="shareBtn">SHARE</button>
         <button id="qrBtn" class="btn-ghost">QR</button>
@@ -188,26 +190,26 @@ Tekan GET KEY untuk menghasilkan key acak.</p>
 
 <script>
 const keys = [
-     "Raja_Cheat_H2Q4H6JW8", 
-  "King_Cheats_IPA2KXJYS", 
-  "King_Cheats_PO2IBUZ5J", 
-  "King_Cheats_JO4P7CCO5", 
-   "King_Cheats_DME08WGHW", 
-   "GRINGO-6206033", 
-   "Raja_Cheats_77EYNJMWK", 
-   "Raja_Cheat_UO4OBCCX8", 
-   "King_Cheats_28WX9YIZ5", 
-   "King_Cheats_9PQJ23W3Y", 
-   "GOD-X-MODS-MQBFD-12H",
+  "King_Cheat_H2Q4H6JW8",
+  "King_Cheats_IPA2KXJYS",
+  "King_Cheats_PO2IBUZ5J",
+  "King_Cheats_JO4P7CCO5",
+  "King_Cheats_DME08WGHW",
+  "GRINGO-6206033",
+  "King_Cheats_77EYNJMWK",
+  "King_Cheat_UO4OBCCX8",
+  "King_Cheats_28WX9YIZ5",
+  "King_Cheats_9PQJ23W3Y",
+  "GOD-X-MODS-MQBFD-12H",
   "GRINGO-7241020",
   "GOD-X-MODS-FIUJZ-12H",
-  "King_Cheats_PMQSCD3CU", 
+  "King_Cheats_PMQSCD3CU",
   "King_Cheats_H4D74PF6D",
   "King_Cheats_57L36GZXV",
   "King_Cheats_O4N50ZKET",
   "King_Cheats_XU1WJ1KAH",
   "King_Cheats_Q1U0TLP9B",
-  "Raja_Cheat_TKYV5EHCV"
+  "Raja_Cheat_TKYV5EHCV",
   "King_Cheats_7PZ7NSTIT"
 ];
 
@@ -221,44 +223,67 @@ const qrArea = document.getElementById("qrArea");
 const qrImg = document.getElementById("qrImg");
 const qrDownload = document.getElementById("qrDownload");
 const progressFill = document.getElementById("progressFill");
+const timeNote = document.getElementById("timeNote");
+const themeSel = document.getElementById("themeSel");
 
 let lastKey = "";
 let expireTimer = null;
 let countdownTimer = null;
 let countdown = 0;
+const DURATION_SECONDS = 3600; // 1 hour = 3600s
+
+function formatTimeLeft(sec){
+  const h = Math.floor(sec/3600);
+  const m = Math.floor((sec%3600)/60);
+  const s = sec%60;
+  if(h>0) return `${h}h ${m}m ${s}s`;
+  if(m>0) return `${m}m ${s}s`;
+  return `${s}s`;
+}
 
 function pickRandom() {
   const i = Math.floor(Math.random() * keys.length);
   lastKey = keys[i];
-  keyText.textContent = lastKey;
 
   // disable tombol GET KEY saat aktif
   pickBtn.disabled = true;
 
-  // reset progress
+  // reset progress & text
   progressFill.style.width = "100%";
+  keyText.textContent = lastKey;
 
   // hentikan timer sebelumnya
   if(expireTimer) clearTimeout(expireTimer);
   if(countdownTimer) clearInterval(countdownTimer);
 
-  // mulai countdown 1 hour
-  countdown = 3600;
+  // mulai countdown DURATION_SECONDS
+  countdown = DURATION_SECONDS;
+  timeNote.textContent = `Sisa waktu: ${formatTimeLeft(countdown)}`;
+
   countdownTimer = setInterval(() => {
     countdown--;
-    progressFill.style.width = (countdown/60*100) + "%";
+    // update progress fill (percent of remaining)
+    const pct = Math.max(0, (countdown / DURATION_SECONDS) * 100);
+    progressFill.style.width = pct + "%";
+    timeNote.textContent = `Sisa waktu: ${formatTimeLeft(countdown)}`;
+
     if(countdown <= 0){
       clearInterval(countdownTimer);
     }
   },1000);
 
-  // auto-expire
+  // auto-expire after DURATION_SECONDS
   expireTimer = setTimeout(() => {
-    keyText.textContent = "SILAHKAN KLICK GET KEY";
+    // expired: clear state, enable button
+    if(countdownTimer) clearInterval(countdownTimer);
+    lastKey = ""; // clear lastKey so copy/share won't work
+    keyText.textContent = "SILAHKAN KLIK GET KEY";
+    timeNote.textContent = "Key expired.";
     progressFill.style.width = "0%";
     pickBtn.disabled = false;
-    alert("⏰ Key telah expired!");
-  }, 60000);
+    // small visual notice instead of blocking alert
+    console.info("Key expired (1 jam).");
+  }, DURATION_SECONDS * 1000);
 }
 
 pickBtn.onclick = pickRandom;
@@ -306,9 +331,11 @@ function applyTheme(t){
     yellow   : ["#2a2a00","#444400","#fff96b"],
     white    : ["#e3e3e3","#f6f6f6","#000000"]
   };
-  r.setProperty("--bg-1", theme[t][0]);
-  r.setProperty("--bg-2", theme[t][1]);
-  r.setProperty("--accent", theme[t][2]);
+  if(theme[t]){
+    r.setProperty("--bg-1", theme[t][0]);
+    r.setProperty("--bg-2", theme[t][1]);
+    r.setProperty("--accent", theme[t][2]);
+  }
 }
 themeSel.onchange = e => applyTheme(e.target.value);
 applyTheme("neon");
