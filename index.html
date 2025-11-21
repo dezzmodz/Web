@@ -231,8 +231,8 @@ function pickRandom() {
   if(expireTimer) clearTimeout(expireTimer);
   if(countdownTimer) clearInterval(countdownTimer);
 
-  // mulai countdown 60 detik
-  countdown = 60;
+  // mulai countdown 1 hour
+  countdown = 3600;
   countdownTimer = setInterval(() => {
     countdown--;
     progressFill.style.width = (countdown/60*100) + "%";
