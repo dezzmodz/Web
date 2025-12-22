@@ -10,15 +10,15 @@
     --bg-1:#0b1116; --bg-2:#0f1a21; --accent:#7dff7d; --card:rgba(0,0,0,0.55);
     --glass: rgba(255,255,255,0.04);
   }
-  html,body{height:100%;margin:0;font-family:'Orbitron',sans-serif;
-    background:linear-gradient(135deg,var(--bg-1),var(--bg-2));
-    color:var(--accent);transition:background 800ms ease}
-  .wrap{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:18px}
-  .card{width:100%;max-width:1100px;min-height:78vh;border-radius:16px;padding:18px;
+  html,body{height:111%;margin:0;font-family:'Orbitron',sans-serif;
+    background:linear-gradient(555deg,var(--bg-1),var(--bg-2));
+    color:var(--accent);transition:background 1000ms ease}
+  .wrap{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:9px}
+  .card{width:900%;max-width:1100px;min-height:100vh;border-radius:16px;padding:18px;
     background:linear-gradient(180deg, rgba(0,0,0,0.45), rgba(0,0,0,0.55));
     border:2px solid rgba(127,255,150,0.06);box-shadow:0 12px 60px rgba(0,0,0,0.6);
     display:grid;grid-template-columns:1fr 360px;gap:16px;backdrop-filter: blur(4px)}
-  @media (max-width:900px){.card{grid-template-columns:1fr;min-height:100vh;border-radius:10px}}
+  @media (max-width:5000px){.card{grid-template-columns:1fr;min-height:100vh;border-radius:10px}}
   h1{margin:0;font-size:20px}
   .key-display{margin-top:12px;padding:20px;border-radius:12px;background:var(--card);
     font-size:20px;font-weight:800;min-height:140px;display:flex;align-items:center;justify-content:center;
@@ -104,20 +104,6 @@
     animation: neonTextBlink 1.5s linear infinite;
   }
 
-  .neon-strike::after {
-    content: "";
-    position: absolute;
-    left: 0;
-    top: 0%;
-    transform: translateY(-50%);
-    width: 100%;
-    height: 6px;
-    background: linear-gradient(90deg,#00eaff,#64ff35); /* neon gradient line */
-    box-shadow: 0 0 10px #00eaff, 0 0 20px #64ff35;
-    /* blink animation for the strike line (looping) */
-    animation: neonStrikeBlink 1.2s linear infinite;
-  }
-
   @keyframes neonTextBlink {
     0% { opacity: 1; filter: drop-shadow(0 0 6px #00eaff); }
     50% { opacity: 0.7; filter: drop-shadow(0 0 3px #00eaff); }
@@ -191,7 +177,7 @@
       </div>
 
         <p class="small">
-         KEY TERDAFTAR: ⪼⪼  PK  ┆ᯓTIDAK TERDAFTAR:<strong><span class="neon-strike">GOD MODS+GRINGO+MK+RUSH+THE KING OFC+YSM+</span></strong>.Tekan <em>START</em> untuk generate.
+         KEY TERDAFTAR: ⪼⪼  PK  ᯓTIDAK TERDAFTAR:<strong><span class="neon-strike">GOD MODS+GRINGO+MK+RUSH+THE KING OFC+YSM</span></strong>. Tekan <em>START</em> untuk generate.
         </p>
 
         <div id="keyDisplay" class="key-display">
@@ -255,7 +241,7 @@
 
         <div class="admin-note">𝘿𝙚𝙯𝙕✘𝙈𝙊𝘿𝙎....☕ INI ADALAH WEB GET KEY+FIES 
         KALIAN BISA GET KEY DAN DAPATKAN KEY RANDOM, PIN LOJIN SILHKAN DM (TELEGRAM: @dezzmods/ TIKTOK: @dezz_realmods</div>
-        <div style="position:fixed;top:990px;left:100px;z-index:200;padding:5px 8px;class="admin-note">©WEB RESMI 𝘿𝙚𝙯𝙕✘𝙈𝙊𝘿𝙎</div>
+        <div style="position:fixed;top:1000px;left:100px;z-index:200;padding:5px 8px;class="admin-note">©WEB RESMI 𝘿𝙚𝙯𝙕✘𝙈𝙊𝘿𝙎</div>
 
       <!-- Musik login -->
 <audio id="loginMusic" loop></audio>
