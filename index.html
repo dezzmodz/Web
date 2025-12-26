@@ -10,7 +10,7 @@
     --bg-1:#0b1116; --bg-2:#0f1a21; --accent:#7dff7d; --card:rgba(0,0,0,0.55);
     --glass: rgba(255,255,255,0.04);
   }
-  html,body{height:111%;margin:0;font-family:'Orbitron',sans-serif;
+  html,body{height:125%;margin:0;font-family:'Orbitron',sans-serif;
     background:linear-gradient(555deg,var(--bg-1),var(--bg-2));
     color:var(--accent);transition:background 1000ms ease}
   .wrap{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:9px}
@@ -198,9 +198,49 @@ body::before{
   box-shadow: 0 0 10px #00ffcc;
 }
 
+#cardContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.card-side {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  background: rgba(0,0,0,0.3);
+  padding: 10px;
+  border-radius: 10px;
+}
+
+.card-img {
+  width: 120px;
+  height: auto;
+  border-radius: 8px;
+}
+
+.card-text h3 { margin:0 0 6px 0; font-size:16px; color: #7dff7d; }
+.card-text p { margin:0; font-size:14px; color: #ccc; }
+
+.admin-note-overlay {
+  position: fixed;       /* tetap di layar saat scroll */
+  bottom: 0px;          /* jarak dari bawah */
+  right: 150px;           /* jarak dari kanan */
+  background: rgba(0,0,0,0.6); /* semi-transparent */
+  color: #7dff7d;        /* teks neon */
+  padding: 8px 12px;     
+  border-radius: 8px;    
+  font-size: 12px;
+  font-weight: 700;
+  z-index: 9999;         /* pastikan di atas konten lain */
+  box-shadow: 0 0 12px rgba(125,255,125,0.5);
+}
+
 </style>
 </head>
 <body>
+
+<div class="admin-note-overlay">©2025 By- 𝘿𝙚𝙯𝙕✘𝙈𝙊𝘿𝙎</div>
 
 <div id="statusBox">
   FPS: <span id="fps">0</span><br>
@@ -240,6 +280,10 @@ body::before{
 
           <div style="margin-top:12px" class="note-strong" id="liveExpireNote"></div>
         </div>
+        
+<!-- SIMPLE NEON POPUP/TOAST -->
+<div id="toast" class="toast">SAYA... HANYA MENGINGATKAN KALO ADA TEKS BAGIAN KIRI ATAS KEDIP WARNA BIRU BERATI ITU TIDAK TERDAFTAR KEYNYA, KALO TIDAK ADA TEKS CORET SEPERTI ITU BERARTI ITU TERDAFTAR</div>
+<button id="showToastBtn" style="position:fixed;top:360px;left:295px;z-index:200;padding:5px 8px;">PESAN, LIST</button>
 
         <div class="controls">
           <button id="pickBtn">START</button>
@@ -276,7 +320,7 @@ body::before{
           <option value="15">𝘿𝙚𝙯𝙕✘𝙈𝙊𝘿𝙎</option>
         </select>
        
-        <label style="margin-top:12px;display:block">📣 Sosial</label>
+        <label style="margin-top:12px;display:block">📣 𝐒𝐨𝐬𝐢𝐚𝐥</label>
         <div class="links">
           <a href="https://lynk.id/dezzreal" target="_blank">Produk</a>
           <a href="https://youtube.com/@trioshorts145?si=4sL0IFJR2DZq6DR0" target="_blank">YouTube</a>
@@ -290,7 +334,34 @@ body::before{
 
         <div class="admin-note">𝘿𝙚𝙯𝙕✘𝙈𝙊𝘿𝙎....☕ INI ADALAH WEB GET KEY+FIES 
         KALIAN BISA GET KEY DAN DAPATKAN KEY RANDOM, PIN LOJIN SILHKAN DM (TELEGRAM: @dezzmods/ TIKTOK: @dezz_realmods</div>
-        <div class="admin-note" style="position:fixed;top:1000px;left:100px;z-index:200;padding:5px 8px;">©WEB RESMI 𝘿𝙚𝙯𝙕✘𝙈𝙊𝘿𝙎</div>
+        <div class="admin-note"> 𝐉𝐔𝐀𝐋 𝐀𝐊𝐔𝐍 𝐅𝐅, 𝐀𝐌𝐀𝐍𝐀𝐇</div>
+<div id="cardList"></div>
+
+<div id="cardContainer"></div>
+
+<script>
+const items = [
+  { img: "https://files.catbox.moe/nn42ph.png", title: "JUAL AKUN HARGA 15K", desc: "WA: 081252280330                         DM Tele:@dezzmods" },
+ // Tambah gambar sebanyak yang kamu mau
+];
+
+const container = document.getElementById('cardContainer');
+
+items.forEach(item => {
+  const card = document.createElement('div');
+  card.className = 'card-side';
+  card.innerHTML = `
+    <img src="${item.img}" class="card-img">
+    <div class="card-text">
+      <h3>${item.title}</h3>
+      <p>${item.desc}</p>
+    </div>
+  `;
+  container.appendChild(card);
+});
+</script>
+</div>
+</div>
 
       <!-- Musik login -->
 <audio id="loginMusic" loop></audio>
@@ -345,11 +416,11 @@ audio.src = loginMusics[randomIndex];
       </div>
       
       <div style="margin-top:12px">
-  <input id="userInput" class="glass-input" type="text" placeholder="MASUKKAN USERNAME" />
+  <input id="userInput" class="glass-input" type="text" placeholder="ENTER USERNAME" />
 </div>
 
       <div style="margin-top:12px">
-        <input id="pinInput" class="glass-input" type="password" placeholder="MASUKAN PASSWORD" />
+        <input id="pinInput" class="glass-input" type="password" placeholder="ENTER PASSWORD" />
       </div>
 
       <div style="display:flex;gap:8px;margin-top:12px">
@@ -373,23 +444,15 @@ audio.src = loginMusics[randomIndex];
       </div>
     </div>
   </div>
-
-  <!-- bottom neon clock -->
-  <div id="clockBottom" style="position:fixed;bottom:10px;left:50%;transform:translateX(-50%);pointer-events:none;z-index:12000">
-    <div class="neon-clock" id="clockNeonBottom">--</div>
-  </div>
-
-   <!-- SIMPLE NEON POPUP/TOAST -->
-<div id="toast" class="toast">SAYA... HANYA MENGINGATKAN KALO ADA TEKS BAGIAN KIRI ATAS KEDIP WARNA BIRU BERATI ITU TIDAK TERDAFTAR KEYNYA, KALO TIDAK ADA TEKS CORET SEPERTI ITU BERARTI ITU TERDAFTAR</div>
-<button id="showToastBtn" style="position:fixed;top:398px;left:295px;z-index:200;padding:5px 8px;">PESAN</button>
-
+   
 <script>
 /* ========== Simple config ========== */
 const VALID_USERS = [
   { user: "Dezz", pass: "Dezz1" },
   { user: "Dezz", pass: "Dezzmods" },
   { user: "Dezz", pass: "FamilyCH" },
-  { user: "Dezz", pass: "123Dezz" }
+  { user: "Dezz", pass: "123Dezz" }, 
+  { user: "AFIF", pass: "NAILGHANY" }
 ];
 const DURATION_SECONDS = 15; // 15 detik
 const KEYS_POOL = [
@@ -470,7 +533,6 @@ const modalClose = document.getElementById('modalClose');
 const modalCopy = document.getElementById('modalCopy');
 const liveExpireNote = document.getElementById('liveExpireNote');
 const clockTop = document.getElementById('clockNeonTop');
-const clockBottom = document.getElementById('clockNeonBottom');
 
 let lastKey = "";
 let expiryAt = 0;
@@ -890,7 +952,6 @@ function updateClocks(){
   const mm = String(now.getMinutes()).padStart(2,'0');
   const ss = String(now.getSeconds()).padStart(2,'0');
   clockTop.textContent = `${d}-${m}-${y} | ${hh}:${mm}:${ss}`;
-  clockBottom.textContent = `${d}-${m}-${y} | ${hh}:${mm}:${ss}`;
 }
 setInterval(updateClocks,1000);
 updateClocks();
