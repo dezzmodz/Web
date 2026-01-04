@@ -140,16 +140,16 @@
     to   { opacity: 1; transform: translateX(-50%) translateY(0) scale(1); }
   }
   .login-avatar {
-  width: 34px;
-  height: 34px;
+  width: 75px;
+  height: 75px;
   border-radius: 50%;
   object-fit: cover;
   filter: drop-shadow(0 6px 18px rgba(125,255,125,0.20));
   border: 2px solid rgba(125,255,125,0.9);
 }
   .title-icon {
-  width: 50px;
-  height: 50px;
+  width: 75px;
+  height: 75px;
   border-radius: 50%;
   object-fit: cover;
   margin-right: 10px;
@@ -167,7 +167,7 @@ body::before{
   content:"";
   position:fixed;
   inset:0;
-  z-index:-1;
+  z-index-999;
   background: linear-gradient(
     120deg,
     var(--bg1),
@@ -423,7 +423,11 @@ const loginMusics = [
   "https://files.catbox.moe/2ntgsx.mp3",
   "https://files.catbox.moe/ip7i35.mp3", 
   "https://files.catbox.moe/rxesmk.mp3", 
-  "https://files.catbox.moe/1pl2c5.mp3"
+  "https://files.catbox.moe/1pl2c5.mp3", 
+  "https://files.catbox.moe/lhz33b.mp3",
+  "https://files.catbox.moe/dwjqgv.mp3",
+  "https://files.catbox.moe/ljblu1.mp3",
+  "https://files.catbox.moe/gps49t.mp3"
 ];
 
 // Ambil elemen audio
@@ -461,7 +465,7 @@ audio.src = loginMusics[randomIndex];
       <div class="login-title">
         <img src="https://files.catbox.moe/5pf5s6.jpg" class="login-avatar" />
         <div>
-          <div style="font-weight:800">🔥✨𝘿𝙚𝙯𝙕✘𝙈𝙊𝘿𝙎🜲💐💫ッ</div>
+          <div style="font-weight:9000; font-size:22px;">🔥✨𝘿𝙚𝙯𝙕✘𝙈𝙊𝘿𝙎🜲💐💫ッ</div>
           <div class="login-note small">⌨︎︎ 𝘌𝘯𝘵𝘦𝘳 𝙐𝙉𝙎𝙀𝙍/𝙋𝘼𝙎𝙎𝙒𝙊𝙍𝘿</div>
           <div class="login-note small">𝐔𝐍𝐒𝐄𝐑/𝐏𝐀𝐒𝐒𝐖𝐎𝐑𝐃 𝐃𝐌 𝐓𝐄𝐋𝐄𝐆𝐑𝐀𝐌</div>
           <div class="click" onclick="DMTELE()">➩ 𝘾𝙇𝙄𝙆 𝘿𝙈 🜲</div>
@@ -484,6 +488,7 @@ audio.src = loginMusics[randomIndex];
       <div id="loginMsg" class="small" style="color:#ff6b6b;margin-top:8px;display:none"></div>
     </div>
   </div>
+  
 
   <!-- MODAL -->
   <div id="modalWrap" class="modal-wrap" aria-hidden="true" style="display:none">
@@ -514,7 +519,9 @@ const KEYS_POOL = [
 "LAYAR PEMUATAN OLEH DezzxMoDS        https://sfl.gl/DaXauAc",
 "HeadsensiFreeV2        https://sfl.gl/4WJrvy    Pw:headsensiv2",
 "WALLHACK_TRAINING_SOCIAL_ISLAND        https://sfl.gl/3ylhocx",
-"HOLO_ORANGE        https://sfl.gl/CwU4"
+"HOLO_ORANGE        https://sfl.gl/CwU4", 
+"𝙃𝙊𝙇𝙊𝙁𝙧𝙚𝙚𝙑2-𝘽𝙮𝙙𝙚𝙯𝙯        https://sfl.gl/EeGr",
+"𝙃𝙊𝙇𝙊𝙁𝙧𝙚𝙚𝙑1-𝘽𝙮𝙙𝙚𝙯𝙯        https://sfl.gl/aMzLp62I"
 ];
 
 
