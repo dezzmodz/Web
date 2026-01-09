@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
-<title>Generator KEY/FILE</title>
+<title>Wewzonemods</title>
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
   :root{
@@ -32,16 +32,140 @@
   .toprow{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
   .logout{background:transparent;border:1px solid rgba(255,255,255,0.06);color:var(--accent);padding:8px;border-radius:8px}
   .small{font-size:13px;opacity:0.85}
-  /* Social links style (block) */
-  .links { margin-top:8px }
-  .links a { display:block; margin:6px 0; text-decoration:none; color:var(--accent); font-weight:700; font-size:15px; padding:8px 10px; border-radius:8px; background: rgba(255,255,255,0.02); box-shadow: 0 6px 18px rgba(0,0,0,0.3); transition: all .18s ease }
-  .links a:hover { color:#fff; text-shadow: 0 0 8px currentColor, 0 0 20px currentColor; transform: translateY(-2px) }
-  .admin-note{font-size:12px;opacity:0.85;margin-top:8px}
-  .modal-wrap{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;z-index:10000;pointer-events:none}
-  .modal{min-width:320px;max-width:780px;background:linear-gradient(180deg,rgba(0,0,0,0.75),rgba(0,0,0,0.5));border-radius:12px;padding:18px;border:1px solid rgba(255,255,255,0.04);box-shadow:0 20px 60px rgba(0,0,0,0.6);transform:scale(.95);opacity:0;transition:all 240ms ease;pointer-events:auto}
-  .modal.show{transform:scale(1);opacity:1}
-  .neon-title{font-size:18px;font-weight:900;text-align:center;color:var(--accent);text-shadow:0 0 12px rgba(0,255,150,0.18),0 0 30px rgba(0,255,150,0.08)}
-  .modal-key {
+ /* ===============================
+   SOCIAL LINKS + NEON ANIMATION
+================================ */
+.links{
+  margin-top:8px;
+}
+
+.links a{
+  position:relative;
+  display:block;
+  margin:8px 0;
+  padding:10px 14px;
+
+  text-decoration:none;
+  font-weight:800;
+  font-size:15px;
+  color:#eafff0;
+
+  border-radius:10px;
+  background:linear-gradient(135deg,#00ff88,#00c8ff);
+
+  box-shadow:0 6px 16px rgba(0,0,0,.45);
+  transition:transform .18s ease, box-shadow .18s ease;
+  overflow:hidden;
+}
+
+/* NEON LINE (RINGAN) */
+.links a::after{
+  content:"";
+  position:absolute;
+  inset:auto 0 0 0;
+  height:2px;
+  background:#00ffcc;
+  box-shadow:0 0 8px #00ffcc;
+}
+
+/* HOVER SAJA */
+.links a:hover{
+  transform:translateY(-2px);
+  box-shadow:
+    0 0 12px rgba(0,255,200,.7),
+    0 0 22px rgba(0,200,255,.5);
+}
+
+/* ===============================
+   ADMIN NOTE BLINK
+================================ */
+.admin-note{
+  margin-top:10px;
+  padding:8px 12px;
+  font-size:12px;
+  font-weight:700;
+  text-align:center;
+
+  color:#bfffe8;
+  border-radius:8px;
+  background:rgba(0,255,150,.15);
+  box-shadow:0 0 10px rgba(0,255,150,.35);
+}
+
+/* ===============================
+   MODAL OVERLAY
+================================ */
+.modal-wrap{
+  position:fixed;
+  inset:0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  z-index:10000;
+  pointer-events:none;
+}
+
+/* ===============================
+   MODAL BOX + GLOW PULSE
+================================ */
+.modal{
+  min-width:320px;
+  max-width:780px;
+  background:linear-gradient(
+    180deg,
+    rgba(0,0,0,0.75),
+    rgba(0,0,0,0.5)
+  );
+  border-radius:12px;
+  padding:18px;
+  border:1px solid rgba(255,255,255,0.04);
+  box-shadow:0 0 20px rgba(0,255,150,.18);
+  transform:scale(.95);
+  opacity:0;
+  transition:all 300ms ease;
+  pointer-events:auto;
+  animation:modalGlow 5s ease-in-out infinite;
+}
+
+@keyframes modalGlow{
+  0%{box-shadow:0 0 18px rgba(0,255,150,.15)}
+  50%{box-shadow:0 0 40px rgba(0,255,150,.35)}
+  100%{box-shadow:0 0 18px rgba(0,255,150,.15)}
+}
+
+/* Modal active */
+.modal-wrap.show{
+  pointer-events:auto;
+}
+.modal.show{
+  transform:scale(1);
+  opacity:1;
+}
+
+/* ===============================
+   NEON TITLE BLINK
+================================ */
+.neon-title{
+  font-size:18px;
+  font-weight:900;
+  text-align:center;
+  color:var(--accent);
+  text-shadow:
+    0 0 12px rgba(0,255,150,0.18),
+    0 0 30px rgba(0,255,150,0.08);
+  animation:titleBlink 5s infinite;
+}
+
+@keyframes titleBlink{
+  0%,100%{opacity:1}
+  50%{opacity:.6}
+}
+
+/* ===============================
+   KEY DISPLAY SCAN EFFECT
+================================ */
+.modal-key{
+  position:relative;
   font-family: monospace;
   margin: 20px 0;
   padding: 30px;
@@ -50,7 +174,28 @@
   text-align: center;
   font-size: 15px;
   color: #000;
-  box-shadow: 5px 30px rgba(0,255,150,0.08);
+  box-shadow: 0 0 30px rgba(0,255,150,0.35);
+  overflow:hidden;
+}
+
+.modal-key::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  height:30%;
+  background: linear-gradient(
+    180deg,
+    transparent,
+    rgba(255,255,255,.6),
+    transparent
+  );
+  animation:keyScan 2.3s infinite;
+}
+
+@keyframes keyScan{
+  0%{transform:translateY(-120%)}
+  100%{transform:translateY(220%)}
+}
 
   /* ===== FIX TEKS KELUAR ===== */
   word-wrap: break-word;
@@ -342,23 +487,53 @@ body::before{
           <option value="15">𝘿𝙚𝙯𝙕✘𝙈𝙊𝘿𝙎</option>
         </select>
        
-        <label style="margin-top:12px;display:block">📣 𝐒𝐨𝐬𝐢𝐚𝐥</label>
         <div class="links">
-          <a href="https://lynk.id/dezzreal" target="_blank">Produk</a>
-          <a href="https://youtube.com/@trioshorts145?si=4sL0IFJR2DZq6DR0" target="_blank">YouTube</a>
-          <a href="https://t.me/+nmDgMfjt-t9jYzA1" target="_blank">Telegram</a>
-          <a href="https://sociabuzz.com/dezzreal" target="_blank">Sociabuzz</a>
-          <a href="https://whatsapp.com/channel/0029Vb7Gl23EFeXuLGF1yB1G" target="_blank">WhatsApp</a>
-          <a href="https://dezzmodz.github.io/UNBANV1/" target="_blank">UNBAN WAV1</a>
-          <a href="https://dezzmodz.github.io/JOIN//" target="_blank">JOIN CHANEL ME</a>
-          <a href="https://youtu.be/8GlH6vkfh5k?si=Aua9Ck34QcVesOLg" target="_blank">𝙏𝙐𝙏𝙊𝙍𝙄𝘼𝙇 𝘿𝙊𝙒𝙉𝙇𝙊𝘼𝘿 𝙃𝙊𝙇𝙊 𝙒𝙀𝘽</a>
-        </div>
+  <a href="https://lynk.id/dezzreal" target="_blank">
+    <span>🛒</span> Produk
+  </a>
+  <a href="https://youtube.com/@trioshorts145?si=4sL0IFJR2DZq6DR0" target="_blank">
+    <span>▶️</span> YouTube
+  </a>
+  <a href="https://t.me/+nmDgMfjt-t9jYzA1" target="_blank">
+    <span>📢</span> Telegram
+  </a>
+  <a href="https://sociabuzz.com/dezzreal" target="_blank">
+    <span>💰</span> Sociabuzz
+  </a>
+  <a href="https://whatsapp.com/channel/0029Vb7Gl23EFeXuLGF1yB1G" target="_blank">
+    <span>💬</span> WhatsApp Channel
+  </a>
+  <a href="https://dezzmodz.github.io/UNBANV1/" target="_blank">
+    <span>🛡️</span> UNBAN WAV1
+  </a>
+  <a href="https://dezzmodz.github.io/JOIN//" target="_blank">
+    <span>🔥</span> Join Channel
+  </a>
+  <a href="https://youtu.be/8GlH6vkfh5k?si=Aua9Ck34QcVesOLg" target="_blank">
+    <span>🎥</span> Tutorial Holo Web
+  </a>
+</div>
 
-        <div class="admin-note">𝘿𝙚𝙯𝙕✘𝙈𝙊𝘿𝙎....☕ INI ADALAH WEB GET KEY+FIES 
-        KALIAN BISA GET KEY DAN DAPATKAN KEY RANDOM, PIN LOJIN SILHKAN DM (TELEGRAM: @dezzmods/ TIKTOK: @dezz_realmods</div>
-        <div class="admin-note"> 𝘿𝘼𝙁𝙏𝘼𝙍 𝙃𝙊𝙇𝙊 𝙏𝙀𝙍𝘽𝘼𝙍𝙐 </div>
+        <div class="admin-info">
+  <span class="tag">☕ INFO SYSTEM</span>
+  <p>
+    <b>𝘿𝙚𝙯𝙕✘𝙈𝙊𝘿𝙎</b> adalah web resmi <span class="hl">GET KEY + FILES</span>.<br>
+    Kamu bisa generate <span class="hl">KEY RANDOM</span> langsung di sini.
+  </p>
+</div>
+
+<div class="admin-contact">
+  📩 PIN LOGIN / AKSES FULL<br>
+  DM ADMIN:
+  <a href="https://t.me/dezzmods" target="_blank">Telegram</a> •
+  <a href="https://www.tiktok.com/@dezz_realmods" target="_blank">TikTok</a>
+</div>
+
+<div class="section-title">
+  ⚡ DAFTAR HOLO TERBARU
+</div>
+
 <div id="cardList"></div>
-
 <div id="cardContainer"></div>
 
 <script>
@@ -520,6 +695,8 @@ audio.src = loginMusics[randomIndex];
 
 <script>
 /* ========== Simple config ========== */
+const TRIAL_KEY = "dz_trial_login_";
+const TRIAL_LIMIT = 3;
 const VALID_USERS = [
   { user: "Dezz", pass: "Dezz1" },
   { user: "Dezz", pass: "Dezzmods" },
@@ -721,81 +898,115 @@ function setAuthorized(flag){
 }
 setAuthorized(isAuthorized());
 
-pinSubmit.addEventListener('click', ()=> {
-  const username = (userInput.value || '').trim();
-  const v = (pinInput.value || '').trim();
-  const fp = deviceFingerprint();
+/* =========================
+   LEVEL 2 - TRIAL LOGIN
+   PER DEVICE (ANTI RESET)
+========================= */
 
-  if(isDeviceBanned(fp)){
-    const sec = getBanRemainingSeconds(fp);
+function trialKey(){
+  return 'dz_trial_login_' + deviceFingerprint();
+}
+
+function getTrial(){
+  return Number(localStorage.getItem(trialKey()) || '0');
+}
+
+function addTrial(){
+  localStorage.setItem(trialKey(), getTrial() + 1);
+}
+
+function trialLeft(){
+  return Math.max(0, TRIAL_LIMIT - getTrial());
+}
+
+function trialExpired(){
+  return getTrial() >= TRIAL_LIMIT;
+}
+
+pinSubmit.addEventListener('click', ()=>{
+
+  // 🔐 cek trial login
+  if(trialExpired()){
     loginMsg.style.display = 'block';
-    loginMsg.textContent = `Perangkat terbanned. Coba lagi dalam ${sec}s`;
+    loginMsg.textContent = 'TRIAL LOGIN HABIS 🔒';
+
+    setTimeout(()=>{
+      window.location.href = "https://t.me/dezzmods";
+    }, 2000);
     return;
   }
 
-  if(!username || !v){
-  loginMsg.style.display = 'block';
-  loginMsg.textContent = 'Username dan Password wajib diisi';
-  return;
-}
+  const username = userInput.value.trim();
+  const password = pinInput.value.trim();
+  const fp = deviceFingerprint();
+
+  if(!username || !password){
+    loginMsg.style.display = 'block';
+    loginMsg.textContent = 'Username & Password wajib diisi';
+    return;
+  }
 
   const valid = VALID_USERS.some(u =>
-  u.user === username && u.pass === v
-);
+    u.user === username && u.pass === password
+  );
 
-if(valid){
-  userInput.value = '';
-pinInput.value  = '';
+  if(valid){
+    // ✅ LOGIN BERHASIL
+    addTrial(); // trial dihitung SEKALI
+
+    userInput.value = '';
+    pinInput.value  = '';
+
     setAuthorized(true);
-    updateUserStatus(); // 👈 TAMBAHKAN INI
-    loginMsg.style.display='none';
+    updateUserStatus();
+    loginMsg.style.display = 'none';
+
     localStorage.removeItem(getBadKeyName(fp));
 
+    // 🎵 MUSIC
     const music = document.getElementById('loginMusic');
-const popup = document.getElementById('musicPopup');
+    const popup = document.getElementById('musicPopup');
 
-function showMusicPopup() {
-  popup.style.display = 'block';
-  setTimeout(() => {
-    popup.style.opacity = '1';
-    popup.style.transform = 'translateX(-50%) translateY(0)';
-  }, 100); // animasi muncul halus
+    function showMusicPopup(){
+      popup.style.display = 'block';
+      setTimeout(()=>{
+        popup.style.opacity = '1';
+        popup.style.transform = 'translateX(-50%) translateY(0)';
+      },100);
 
-  // otomatis hilang setelah 3 detik
-  setTimeout(() => {
-    popup.style.opacity = '1';
-    popup.style.transform = 'translateX(-50%) translateY(70px)';
-    setTimeout(() => popup.style.display = 'none', 1000); // tunggu animasi hilang
-  }, 3000);
-}
+      setTimeout(()=>{
+        popup.style.opacity = '0';
+        popup.style.transform = 'translateX(-50%) translateY(40px)';
+        setTimeout(()=> popup.style.display='none',600);
+      },3000);
+    }
 
-// contoh pemanggilan saat login sukses
-music.play().then(() => {
-  showMusicPopup();
-}).catch(() => {
-  // fallback autoplay gagal
-  popup.textContent = "Klik untuk memulai musik 🎵";
-  popup.style.display = 'block';
-  setTimeout(() => popup.style.display = 'none', 5000);
-});
+    music.play().then(showMusicPopup).catch(()=>{});
+
   } else {
-    loginMsg.style.display='block';
-    loginMsg.textContent='PIN salah!';
-    pinInput.animate([{ transform: 'translateX(-6px)'},{ transform: 'translateX(6px)'},{ transform: 'translateX(0)' }], { duration: 280, easing:'ease' });
+    // ❌ LOGIN GAGAL
+    loginMsg.style.display = 'block';
+    loginMsg.textContent = `LOGIN SALAH ❌ (SISA ${trialLeft()}x)`;
+
+    pinInput.animate(
+      [{transform:'translateX(-6px)'},{transform:'translateX(6px)'},{transform:'translateX(0)'}],
+      {duration:280,easing:'ease'}
+    );
+
     const r = incrementBad(fp);
     if(r.banned){
       loginMsg.textContent = 'Perangkat dibanned sementara karena terlalu banyak percobaan.';
-    } else {
-      loginMsg.textContent += ` (${r.count}/${MAX_BAD})`;
     }
   }
-});  
+});
+
 pinCancel.addEventListener('click', ()=>{
   if(!isAuthorized()){
     loginMsg.style.display = 'block';
     loginMsg.textContent = 'Login diperlukan';
   }
 });
+
 logoutBtn.addEventListener('click', ()=> setAuthorized(false));
 
 /* =========================
