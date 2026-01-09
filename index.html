@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
-<title>Wewzonemods</title>
+<title>Generator KEY/FILE</title>
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
   :root{
@@ -695,8 +695,6 @@ audio.src = loginMusics[randomIndex];
 
 <script>
 /* ========== Simple config ========== */
-const TRIAL_KEY = "dz_trial_login_";
-const TRIAL_LIMIT = 3;
 const VALID_USERS = [
   { user: "Dezz", pass: "Dezz1" },
   { user: "Dezz", pass: "Dezzmods" },
@@ -898,115 +896,81 @@ function setAuthorized(flag){
 }
 setAuthorized(isAuthorized());
 
-/* =========================
-   LEVEL 2 - TRIAL LOGIN
-   PER DEVICE (ANTI RESET)
-========================= */
-
-function trialKey(){
-  return 'dz_trial_login_' + deviceFingerprint();
-}
-
-function getTrial(){
-  return Number(localStorage.getItem(trialKey()) || '0');
-}
-
-function addTrial(){
-  localStorage.setItem(trialKey(), getTrial() + 1);
-}
-
-function trialLeft(){
-  return Math.max(0, TRIAL_LIMIT - getTrial());
-}
-
-function trialExpired(){
-  return getTrial() >= TRIAL_LIMIT;
-}
-
-pinSubmit.addEventListener('click', ()=>{
-
-  // 🔐 cek trial login
-  if(trialExpired()){
-    loginMsg.style.display = 'block';
-    loginMsg.textContent = 'TRIAL LOGIN HABIS 🔒';
-
-    setTimeout(()=>{
-      window.location.href = "https://t.me/dezzmods";
-    }, 2000);
-    return;
-  }
-
-  const username = userInput.value.trim();
-  const password = pinInput.value.trim();
+pinSubmit.addEventListener('click', ()=> {
+  const username = (userInput.value || '').trim();
+  const v = (pinInput.value || '').trim();
   const fp = deviceFingerprint();
 
-  if(!username || !password){
+  if(isDeviceBanned(fp)){
+    const sec = getBanRemainingSeconds(fp);
     loginMsg.style.display = 'block';
-    loginMsg.textContent = 'Username & Password wajib diisi';
+    loginMsg.textContent = `Perangkat terbanned. Coba lagi dalam ${sec}s`;
     return;
   }
 
+  if(!username || !v){
+  loginMsg.style.display = 'block';
+  loginMsg.textContent = 'Username dan Password wajib diisi';
+  return;
+}
+
   const valid = VALID_USERS.some(u =>
-    u.user === username && u.pass === password
-  );
+  u.user === username && u.pass === v
+);
 
-  if(valid){
-    // ✅ LOGIN BERHASIL
-    addTrial(); // trial dihitung SEKALI
-
-    userInput.value = '';
-    pinInput.value  = '';
-
+if(valid){
+  userInput.value = '';
+pinInput.value  = '';
     setAuthorized(true);
-    updateUserStatus();
-    loginMsg.style.display = 'none';
-
+    updateUserStatus(); // 👈 TAMBAHKAN INI
+    loginMsg.style.display='none';
     localStorage.removeItem(getBadKeyName(fp));
 
-    // 🎵 MUSIC
     const music = document.getElementById('loginMusic');
-    const popup = document.getElementById('musicPopup');
+const popup = document.getElementById('musicPopup');
 
-    function showMusicPopup(){
-      popup.style.display = 'block';
-      setTimeout(()=>{
-        popup.style.opacity = '1';
-        popup.style.transform = 'translateX(-50%) translateY(0)';
-      },100);
+function showMusicPopup() {
+  popup.style.display = 'block';
+  setTimeout(() => {
+    popup.style.opacity = '1';
+    popup.style.transform = 'translateX(-50%) translateY(0)';
+  }, 100); // animasi muncul halus
 
-      setTimeout(()=>{
-        popup.style.opacity = '0';
-        popup.style.transform = 'translateX(-50%) translateY(40px)';
-        setTimeout(()=> popup.style.display='none',600);
-      },3000);
-    }
+  // otomatis hilang setelah 3 detik
+  setTimeout(() => {
+    popup.style.opacity = '1';
+    popup.style.transform = 'translateX(-50%) translateY(70px)';
+    setTimeout(() => popup.style.display = 'none', 1000); // tunggu animasi hilang
+  }, 3000);
+}
 
-    music.play().then(showMusicPopup).catch(()=>{});
-
+// contoh pemanggilan saat login sukses
+music.play().then(() => {
+  showMusicPopup();
+}).catch(() => {
+  // fallback autoplay gagal
+  popup.textContent = "Klik untuk memulai musik 🎵";
+  popup.style.display = 'block';
+  setTimeout(() => popup.style.display = 'none', 5000);
+});
   } else {
-    // ❌ LOGIN GAGAL
-    loginMsg.style.display = 'block';
-    loginMsg.textContent = `LOGIN SALAH ❌ (SISA ${trialLeft()}x)`;
-
-    pinInput.animate(
-      [{transform:'translateX(-6px)'},{transform:'translateX(6px)'},{transform:'translateX(0)'}],
-      {duration:280,easing:'ease'}
-    );
-
+    loginMsg.style.display='block';
+    loginMsg.textContent='PIN salah!';
+    pinInput.animate([{ transform: 'translateX(-6px)'},{ transform: 'translateX(6px)'},{ transform: 'translateX(0)' }], { duration: 280, easing:'ease' });
     const r = incrementBad(fp);
     if(r.banned){
       loginMsg.textContent = 'Perangkat dibanned sementara karena terlalu banyak percobaan.';
+    } else {
+      loginMsg.textContent += ` (${r.count}/${MAX_BAD})`;
     }
   }
-});
-
+});  
 pinCancel.addEventListener('click', ()=>{
   if(!isAuthorized()){
     loginMsg.style.display = 'block';
     loginMsg.textContent = 'Login diperlukan';
   }
 });
-
 logoutBtn.addEventListener('click', ()=> setAuthorized(false));
 
 /* =========================
