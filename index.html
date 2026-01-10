@@ -22,12 +22,12 @@
    GLOBAL STYLES
 ================================ */
 html, body {
-  height: 130%;
+  height: 100%;
   margin: 0;
   font-family: 'Orbitron', sans-serif;
   background: linear-gradient(555deg, var(--bg-1), var(--bg-2));
   color: var(--accent);
-  transition: background 1000ms ease;
+  transition: background 5000ms ease;
   word-wrap: break-word;
   word-break: break-word;
   overflow-wrap: break-word;
@@ -43,7 +43,7 @@ body::before {
   inset: 0;
   z-index: -1;
   background: linear-gradient(120deg, var(--bg-1), var(--bg-2), var(--accent));
-  background-size: 300% 300%;
+  background-size: 900% 900%;
   animation: bgMove 20s ease infinite;
 }
 
@@ -867,6 +867,50 @@ body::before{
   text-shadow:0 0 8px rgba(125,255,125,0.8);
 }
 
+.main-title {
+  font-size: 24px;       /* ukuran lebih kecil */
+  margin: 0;             /* hapus margin default */
+  text-align: left;      /* geser ke kiri */
+  color: #7dff7d;        /* warna neon sesuai tema */
+}
+
+/* pindahkan ke atas / kanan */
+.toprow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* judul kiri, logout kanan */
+  width: 100%;                     /* pastikan container full */
+}
+
+/* Judul kiri */
+.toprow h1 {
+  font-size: 24px;
+  margin: 0;
+  flex: 1;  /* biar mengambil space yang tersisa */
+}
+
+/* Logout kanan */
+.logout {
+  width: 100px;            /* lebar tombol */
+  text-align: center;      /* teks di tengah tombol */
+  padding: 6px 12px;
+  background: #ff6b6b;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 700;
+  flex-shrink: 0;          /* jangan mengecil walau flex container sempit */
+}
+
+.main-title {
+  font-size: 24px;       /* ukuran lebih kecil */
+  margin: 0;             /* hapus margin default */
+  text-align: left;      /* rata kiri */
+  color: #7dff7d;        /* warna neon */
+  font-weight: 50;
+}
+
 </style>
 </head>
 <body>
@@ -890,7 +934,7 @@ body::before{
     <div>
       <div class="toprow">
         <img src="https://files.catbox.moe/5pf5s6.jpg" class="title-icon">
-        <h1>★★★𝘿𝙚𝙯𝙕✘𝙈𝙊𝘿𝙎★★★</h1>
+        <h1 class="main-title">𝘿𝙚𝙯𝙕✘𝙈𝙊𝘿𝙎</h1>
         <div style="margin-left:auto">
           <button id="logoutBtn" class="logout" style="display:none">Logout</button>
         </div>
@@ -950,6 +994,7 @@ body::before{
           <option value="14">Metal Chrome</option>
           <option value="15">𝘿𝙚𝙯𝙕✘𝙈𝙊𝘿𝙎</option>
         </select>
+       </div>
        
         <div class="links-grid">
   <a href="https://lynk.id/dezzreal" target="_blank">
