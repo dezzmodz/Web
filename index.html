@@ -6,78 +6,314 @@
 <title>DezZxMods-Web</title>
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
-  :root{
-    --bg-1:#0b1116; --bg-2:#0f1a21; --accent:#7dff7d; --card:rgba(0,0,0,0.55);
-    --glass: rgba(255,255,255,0.04);
-  }
-  html,body{height:130%;margin:0;font-family:'Orbitron',sans-serif;
-    background:linear-gradient(555deg,var(--bg-1),var(--bg-2));
-    color:var(--accent);transition:background 1000ms ease}
-  .wrap{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:9px}
-  .card{width:900%;max-width:1100px;min-height:100vh;border-radius:16px;padding:18px;
-    background:linear-gradient(180deg, rgba(0,0,0,0.45), rgba(0,0,0,0.55));
-    border:2px solid rgba(127,255,150,0.06);box-shadow:0 12px 60px rgba(0,0,0,0.6);
-    display:grid;grid-template-columns:1fr 360px;gap:16px;backdrop-filter: blur(4px)}
-  @media (max-width:5000px){.card{grid-template-columns:1fr;min-height:100vh;border-radius:10px}}
-  h1{margin:0;font-size:20px}
-  .key-display{margin-top:12px;padding:20px;border-radius:12px;background:var(--card);
-    font-size:20px;font-weight:800;min-height:140px;display:flex;align-items:center;justify-content:center;
-    text-align:center;position:relative;flex-direction:column;color:var(--accent)}
-  .controls{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
-  button,.btn{background:var(--accent);color:#000;border:0;padding:10px 14px;border-radius:10px;font-weight:700;cursor:pointer;box-shadow:0 6px 18px rgba(0,0,0,0.4)}
-  .btn-ghost{background:transparent;border:1px solid rgba(127,255,150,0.08);color:var(--accent);backdrop-filter: blur(2px)}
-  .progress-bar{width:100%;height:12px;background:rgba(255,255,255,0.06);border-radius:999px;overflow:hidden;margin-top:14px}
-  .progress-fill{height:100%;width:0%;background:linear-gradient(90deg, rgba(255,255,255,0.06), var(--accent));transition:width 250ms linear;box-shadow:0 6px 20px rgba(0,0,0,0.5)}
-  .note{font-size:13px;opacity:0.95;margin-top:8px}
-  .toprow{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
-  .logout{background:transparent;border:1px solid rgba(255,255,255,0.06);color:var(--accent);padding:8px;border-radius:8px}
-  .small{font-size:13px;opacity:0.85}
- /* ===============================
-   SOCIAL LINKS + NEON ANIMATION
+/* ===============================
+   VARIABLES / THEME
 ================================ */
-.links{
-  margin-top:8px;
-}
-
-.links a{
-  position:relative;
-  display:block;
-  margin:8px 0;
-  padding:10px 14px;
-
-  text-decoration:none;
-  font-weight:800;
-  font-size:15px;
-  color:#eafff0;
-
-  border-radius:10px;
-  background:linear-gradient(135deg,#00ff88,#00c8ff);
-
-  box-shadow:0 6px 16px rgba(0,0,0,.45);
-  transition:transform .18s ease, box-shadow .18s ease;
-  overflow:hidden;
-}
-
-/* NEON LINE (RINGAN) */
-.links a::after{
-  content:"";
-  position:absolute;
-  inset:auto 0 0 0;
-  height:2px;
-  background:#00ffcc;
-  box-shadow:0 0 8px #00ffcc;
-}
-
-/* HOVER SAJA */
-.links a:hover{
-  transform:translateY(-2px);
-  box-shadow:
-    0 0 12px rgba(0,255,200,.7),
-    0 0 22px rgba(0,200,255,.5);
+:root {
+  --bg-1: #0b1116;
+  --bg-2: #0f1a21;
+  --accent: #7dff7d;
+  --card: rgba(0,0,0,0.55);
+  --glass: rgba(255,255,255,0.04);
+  --neon-color: #00ffcc;
 }
 
 /* ===============================
-   ADMIN NOTE BLINK
+   GLOBAL STYLES
+================================ */
+html, body {
+  height: 130%;
+  margin: 0;
+  font-family: 'Orbitron', sans-serif;
+  background: linear-gradient(555deg, var(--bg-1), var(--bg-2));
+  color: var(--accent);
+  transition: background 1000ms ease;
+  word-wrap: break-word;
+  word-break: break-word;
+  overflow-wrap: break-word;
+  max-width: 100%;
+}
+
+/* ===============================
+   BACKGROUND ANIMATION
+================================ */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(120deg, var(--bg-1), var(--bg-2), var(--accent));
+  background-size: 300% 300%;
+  animation: bgMove 20s ease infinite;
+}
+
+@keyframes bgMove {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* ===============================
+   LAYOUT
+================================ */
+.wrap {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 9px;
+}
+
+.card {
+  width: 900%;
+  max-width: 1100px;
+  min-height: 100vh;
+  border-radius: 16px;
+  padding: 18px;
+  background: linear-gradient(180deg, rgba(0,0,0,0.45), rgba(0,0,0,0.55));
+  border: 2px solid rgba(127,255,150,0.06);
+  box-shadow: 0 12px 60px rgba(0,0,0,0.6);
+  display: grid;
+  grid-template-columns: 1fr 360px;
+  gap: 16px;
+  backdrop-filter: blur(4px);
+}
+
+@media (max-width: 700px) {
+  .card {
+    grid-template-columns: 1fr;
+    min-height: 100vh;
+    border-radius: 10px;
+    padding: 12px;
+  }
+}
+
+/* ===============================
+   KEY DISPLAY / CARD
+================================ */
+.key-display {
+  margin-top: 12px;
+  padding: 20px;
+  border-radius: 12px;
+  background: var(--card);
+  font-size: 20px;
+  font-weight: 800;
+  min-height: 140px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  position: relative;
+  flex-direction: column;
+  color: var(--accent);
+  box-shadow: 0 0 15px rgba(0,255,150,0.35);
+  backdrop-filter: blur(4px) saturate(1.2);
+}
+
+/* ===============================
+   BUTTONS & CONTROLS
+================================ */
+.controls {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-top: 12px;
+}
+
+button, .btn {
+  background: var(--accent);
+  color: #000;
+  border: 0;
+  padding: 10px 14px;
+  border-radius: 10px;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.4);
+  transition: transform 0.2s ease, box-shadow 0.3s ease;
+}
+
+.btn-ghost {
+  background: transparent;
+  border: 1px solid rgba(127,255,150,0.08);
+  color: var(--accent);
+  backdrop-filter: blur(2px);
+}
+
+button:hover, .btn:hover {
+  transform: translateY(-2px) scale(1.03);
+  box-shadow: 0 12px 30px rgba(125,255,125,0.8);
+}
+
+/* ===============================
+   PROGRESS BAR
+================================ */
+.progress-bar {
+  width: 100%;
+  height: 12px;
+  background: rgba(255,255,255,0.06);
+  border-radius: 999px;
+  overflow: hidden;
+  margin-top: 14px;
+}
+
+.progress-fill {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, rgba(255,255,255,0.06), var(--accent));
+  transition: width 250ms linear;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.5);
+}
+
+/* ===============================
+   ADMIN NOTE / OVERLAY
+================================ */
+.admin-note-overlay {
+  position: fixed;
+  bottom: 0px;
+  right: 150px;
+  padding: 10px 16px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 700;
+  color: #fff;
+  z-index: 9999;
+  box-shadow: 0 0 20px rgba(125,255,125,0.8), 0 0 40px rgba(125,255,125,0.4);
+
+  /* Animated gradient neon background */
+  background: linear-gradient(270deg, #00ffcc, #7dff7d, #00c8ff, #7dff7d);
+  background-size: 800% 800%;
+  animation: neonOverlayBG 8s ease infinite;
+
+  /* Glassy effect */
+  backdrop-filter: blur(6px) saturate(1.4);
+  -webkit-backdrop-filter: blur(6px) saturate(1.4);
+
+  transition: transform 0.2s ease, box-shadow 0.3s ease, color 0.3s ease;
+}
+
+.admin-note-overlay:hover {
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 0 35px rgba(125,255,125,1), 0 0 70px rgba(125,255,125,0.5);
+  color: #00ffcc;
+}
+
+.admin-note-overlay:active {
+  transform: translateY(1px) scale(0.97);
+  box-shadow: 0 0 15px rgba(125,255,125,0.5), 0 0 30px rgba(125,255,125,0.25);
+}
+
+@keyframes neonOverlayBG {
+  0% { background-position: 0% 50%; }
+  25% { background-position: 50% 100%; }
+  50% { background-position: 100% 50%; }
+  75% { background-position: 50% 0%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* ===============================
+   NEON STRIKE / TITLE
+================================ */
+.neon-title {
+  font-size: 18px;
+  font-weight: 900;
+  text-align: center;
+  color: var(--accent);
+  text-shadow: 0 0 12px rgba(0,255,150,0.18), 0 0 30px rgba(0,255,150,0.08);
+  animation: titleBlink 5s infinite;
+}
+
+@keyframes titleBlink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.6; }
+}
+
+/* ===============================
+   RESPONSIVENESS
+================================ */
+@media (max-width: 700px) {
+  .key-display {
+    min-height: 160px;
+  }
+
+  .admin-note-overlay {
+    right: 20px;
+    bottom: 20px;
+  }
+}
+ /* ===============================
+   SOCIAL LINKS + NEON ANIMATION
+================================ */
+.links-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
+
+/* Tombol utama */
+.links-grid a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 14px;
+  border-radius: 50px;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 14px;
+  color: #fff;
+  background: linear-gradient(135deg, #2b1a3f, #3f1a6f);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.5);
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* Gradient shimmer halus */
+.links-grid a::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(120deg, rgba(255,255,255,0.05), rgba(255,255,255,0.15), rgba(255,255,255,0.05));
+  background-size: 200% 100%;
+  border-radius: 50px;
+  z-index: 0;
+  animation: shimmer 4s linear infinite;
+}
+
+/* Teks & icon tetap di atas */
+.links-grid a * {
+  position: relative;
+  z-index: 1;
+}
+
+/* Hover animasi */
+.links-grid a:hover {
+  transform: translateY(-2px) scale(1.03);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.6);
+}
+
+/* Klik / active animasi */
+.links-grid a:active {
+  transform: translateY(1px) scale(0.97);
+  box-shadow: 0 12px 30px rgba(255,255,255,0.3);
+  animation: clickFlash 0.3s ease;
+}
+
+/* Animasi shimmer */
+@keyframes shimmer {
+  0% { background-position: -100% 0; }
+  100% { background-position: 200% 0; }
+}
+
+/* Animasi klik flash ringan */
+@keyframes clickFlash {
+  0% { box-shadow: 0 12px 30px rgba(255,255,255,0.3); }
+  50% { box-shadow: 0 12px 40px rgba(255,255,255,0.6); }
+  100% { box-shadow: 0 12px 30px rgba(255,255,255,0.3); }
+}
+
+/* ===============================
+   ADMIN NOTE UPGRADE IBLISTITAN
 ================================ */
 .admin-note{
   margin-top:10px;
@@ -85,7 +321,6 @@
   font-size:12px;
   font-weight:700;
   text-align:center;
-
   color:#bfffe8;
   border-radius:8px;
   background:rgba(0,255,150,.15);
@@ -211,20 +446,135 @@
     text-shadow:0 0 6px rgba(125,255,125,0.9),0 0 12px rgba(125,255,125,0.6),0 0 20px rgba(125,255,125,0.35); opacity:0.95; white-space:nowrap; pointer-events:none;}
   #clockTopWrap { position: fixed; top: 12px; right: 18px; z-index:12000; display:flex; align-items:center; gap:10px; }
 
-  /* neon-glass login */
-  .login-overlay{position:fixed;inset:0;background:linear-gradient(180deg, rgba(0,0,0,0.55), rgba(0,0,0,0.7));display:flex;align-items:center;justify-content:center;z-index:9999}
-  .login-card{
-    width:360px;padding:18px;border-radius:14px;
-    background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.02));
-    border:1px solid rgba(127,255,150,0.06);
-    box-shadow: 0 8px 40px rgba(0,0,0,0.6);
-    backdrop-filter: blur(8px) saturate(1.1);
-    position:relative; overflow:hidden;
-  }
-  .login-card::before{ content:""; position:absolute; inset:0; pointer-events:none; background: linear-gradient(90deg, rgba(127,255,150,0.02), rgba(127,255,150,0.005)); mix-blend-mode: overlay; }
-  .login-title{display:flex;align-items:center;gap:10px}
-  .glass-input{width:100%;padding:12px;border-radius:10px;border:1px solid rgba(255,255,255,0.06);background:rgba(0,0,0,0.16);color:var(--accent);box-sizing:border-box;font-weight:700}
-  .login-note{font-size:13px;opacity:0.9;margin-top:8px}
+  /* ===============================
+   LOGIN OVERLAY ANIMASI
+================================ */
+.login-overlay {
+  position: fixed;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(0,0,0,0.55), rgba(0,0,0,0.7));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  opacity: 0;
+  animation: overlayFadeIn 1s forwards;
+}
+
+@keyframes overlayFadeIn {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+.login-card {
+  width: 360px;
+  padding: 18px;
+  border-radius: 14px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.02));
+  border: 1px solid rgba(127,255,150,0.06);
+  box-shadow: 0 8px 40px rgba(0,0,0,0.6);
+  backdrop-filter: blur(8px) saturate(1.1);
+  position: relative;
+  overflow: hidden;
+  transform: scale(0.8);
+  opacity: 0;
+  animation: cardPopIn 0.6s forwards 0.3s;
+}
+
+@keyframes cardPopIn {
+  0% { transform: scale(0.8); opacity: 0; }
+  60% { transform: scale(1.05); opacity: 1; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.login-card::before {
+  content:"";
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  background: linear-gradient(90deg, rgba(127,255,150,0.02), rgba(127,255,150,0.005));
+  mix-blend-mode: overlay;
+  animation: shimmer 4s linear infinite;
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+/* Teks tetap normal */
+.login-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--accent);
+  font-weight: 900;
+  font-size: 15px;
+  margin-bottom: 12px;
+}
+
+.glass-input {
+  width: 100%;
+  padding: 12px;
+  border-radius: 10px;
+  border: 1px solid rgba(255,255,255,0.06);
+  background: rgba(0,0,0,0.16);
+  color: var(--accent);
+  box-sizing: border-box;
+  font-weight: 700;
+  margin-bottom: 10px;
+  transition: 0.3s;
+}
+
+.glass-input:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 20px var(--accent), 0 0 40px rgba(125,255,125,0.6);
+}
+
+/* ===============================
+   TOMBOL NEON (login & batal)
+================================ */
+.login-btn {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 8px;
+  border-radius: 10px;
+  border: none;
+  font-weight: 700;
+  cursor: pointer;
+  background: linear-gradient(90deg, #00ffcc, #7dff7d, #00c8ff);
+  color: #000;
+  box-shadow: 0 0 15px rgba(0,255,150,0.6);
+  transition: 0.2s;
+  animation: neonBtnGlow 2s infinite;
+}
+
+.login-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 35px rgba(0,255,150,1);
+}
+
+.login-btn:active {
+  transform: scale(0.97);
+  box-shadow: 0 0 10px rgba(0,255,150,0.5);
+}
+
+.cancel-btn {
+  background: rgba(0,0,0,0.3);
+  color: #7dff7d;
+  box-shadow: 0 0 10px rgba(125,255,125,0.3);
+}
+
+.cancel-btn:hover {
+  background: rgba(0,0,0,0.5);
+  box-shadow: 0 0 25px rgba(125,255,125,0.6);
+}
+
+@keyframes neonBtnGlow {
+  0%, 100% { box-shadow: 0 0 15px #00ffcc, 0 0 30px #7dff7d; }
+  50% { box-shadow: 0 0 25px #00ffcc, 0 0 50px #7dff7d; }
+}
 
   /* blinking copy button */
   .btn-copy { position:relative; overflow:visible; transition:transform .12s ease; box-shadow: 0 8px 30px rgba(125,255,125,0.08); border-radius:10px; font-weight:800 }
@@ -390,17 +740,131 @@ body::before{
 .card-text p { margin:0; font-size:14px; color: #ccc; }
 
 .admin-note-overlay {
-  position: fixed;       /* tetap di layar saat scroll */
-  bottom: 0px;          /* jarak dari bawah */
-  right: 150px;           /* jarak dari kanan */
-  background: rgba(0,0,0,0.6); /* semi-transparent */
-  color: #7dff7d;        /* teks neon */
-  padding: 8px 12px;     
-  border-radius: 8px;    
+  position: fixed;
+  bottom: 0px;
+  right: 150px;
+  padding: 10px 16px;
+  border-radius: 12px;
   font-size: 12px;
   font-weight: 700;
-  z-index: 9999;         /* pastikan di atas konten lain */
-  box-shadow: 0 0 12px rgba(125,255,125,0.5);
+  color: #fff;
+  z-index: 9999;
+  box-shadow: 0 0 20px rgba(125,255,125,0.8), 0 0 40px rgba(125,255,125,0.4);
+
+  /* Animated gradient neon background */
+  background: linear-gradient(270deg, #00ffcc, #7dff7d, #00c8ff, #7dff7d);
+  background-size: 800% 800%;
+  animation: neonOverlayBG 8s ease infinite;
+
+  /* glassy effect */
+  backdrop-filter: blur(6px) saturate(1.4);
+  -webkit-backdrop-filter: blur(6px) saturate(1.4);
+
+  /* smooth transition */
+  transition: transform 0.2s ease, box-shadow 0.3s ease, color 0.3s ease;
+}
+
+/* Hover effect */
+.admin-note-overlay:hover {
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 0 35px rgba(125,255,125,1), 0 0 70px rgba(125,255,125,0.5);
+  color: #00ffcc;
+}
+
+/* Click / active effect */
+.admin-note-overlay:active {
+  transform: translateY(1px) scale(0.97);
+  box-shadow: 0 0 15px rgba(125,255,125,0.5), 0 0 30px rgba(125,255,125,0.25);
+}
+
+/* Gradient animation */
+@keyframes neonOverlayBG {
+  0% { background-position: 0% 50%; }
+  25% { background-position: 50% 100%; }
+  50% { background-position: 100% 50%; }
+  75% { background-position: 50% 0%; }
+  100% { background-position: 0% 50%; }
+}
+
+.admin-board{
+  margin-top:16px;
+  padding:16px;
+  border-radius:14px;
+  background: linear-gradient(
+    180deg,
+    rgba(0,0,0,0.75),
+    rgba(0,0,0,0.55)
+  );
+  border:1px solid rgba(125,255,125,0.25);
+  box-shadow:
+    0 0 18px rgba(125,255,125,0.35),
+    inset 0 0 25px rgba(255,255,255,0.04);
+  backdrop-filter: blur(6px);
+  position:relative;
+}
+
+/* garis neon papan */
+.admin-board::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  border-radius:14px;
+  background: linear-gradient(
+    120deg,
+    transparent,
+    rgba(125,255,125,0.35),
+    transparent
+  );
+  opacity:.6;
+  animation: boardScan 4s linear infinite;
+  pointer-events:none;
+}
+
+@keyframes boardScan{
+  0%{background-position:-200% 0}
+  100%{background-position:200% 0}
+}
+
+/* judul papan */
+.admin-board-title{
+  font-size:13px;
+  font-weight:900;
+  color:#7dff7d;
+  margin-bottom:10px;
+  text-shadow:0 0 8px rgba(125,255,125,0.7);
+}
+
+/* isi teks */
+.admin-board-body{
+  font-size:13px;
+  line-height:1.6;
+  color:#eaffea;
+  margin-bottom:10px;
+}
+
+/* highlight */
+.admin-board .hl{
+  color:#7dff7d;
+  font-weight:800;
+  text-shadow:0 0 6px rgba(125,255,125,0.6);
+}
+
+/* footer / kontak */
+.admin-board-footer{
+  font-size:12px;
+  color:#bfffe8;
+  border-top:1px dashed rgba(125,255,125,0.25);
+  padding-top:8px;
+}
+
+.admin-board-footer a{
+  color:#7dff7d;
+  text-decoration:none;
+  font-weight:800;
+}
+
+.admin-board-footer a:hover{
+  text-shadow:0 0 8px rgba(125,255,125,0.8);
 }
 
 </style>
@@ -487,7 +951,7 @@ body::before{
           <option value="15">𝘿𝙚𝙯𝙕✘𝙈𝙊𝘿𝙎</option>
         </select>
        
-        <div class="links">
+        <div class="links-grid">
   <a href="https://lynk.id/dezzreal" target="_blank">
     <span>🛒</span> Produk
   </a>
@@ -514,19 +978,21 @@ body::before{
   </a>
 </div>
 
-        <div class="admin-info">
-  <span class="tag">☕ INFO SYSTEM</span>
-  <p>
-    <b>𝘿𝙚𝙯𝙕✘𝙈𝙊𝘿𝙎</b> adalah web resmi <span class="hl">GET KEY + FILES</span>.<br>
-    Kamu bisa generate <span class="hl">KEY RANDOM</span> langsung di sini.
-  </p>
-</div>
+        <div class="admin-board">
+  <div class="admin-board-title">☕ INFO SYSTEM</div>
 
-<div class="admin-contact">
-  📩 PIN LOGIN / AKSES FULL<br>
-  DM ADMIN:
-  <a href="https://t.me/dezzmods" target="_blank">Telegram</a> •
-  <a href="https://www.tiktok.com/@dezz_realmods" target="_blank">TikTok</a>
+  <div class="admin-board-body">
+    <b>𝘿𝙚𝙯𝙕✘𝙈𝙊𝘿𝙎</b> adalah web resmi 
+    <span class="hl">GET KEY + FILES</span>.<br>
+    Kamu bisa generate <span class="hl">KEY RANDOM</span> langsung di sini.
+  </div>
+
+  <div class="admin-board-footer">
+    📩 PIN LOGIN / AKSES FULL<br>
+    DM ADMIN:
+    <a href="https://t.me/dezzmods" target="_blank">Telegram</a> •
+    <a href="https://www.tiktok.com/@dezz_realmods" target="_blank">TikTok</a>
+  </div>
 </div>
 
 <div class="section-title">
@@ -648,7 +1114,6 @@ audio.src = loginMusics[randomIndex];
   Musik Dimulai 🎵
 </div>
 
-
   <!-- LOGIN OVERLAY (neon-glass) -->
   <div id="loginOverlay" class="login-overlay" style="display:none">
     <div class="login-card">
@@ -678,7 +1143,7 @@ audio.src = loginMusics[randomIndex];
       <div id="loginMsg" class="small" style="color:#ff6b6b;margin-top:8px;display:none"></div>
     </div>
   </div>
-  
+ 
 
   <!-- MODAL -->
   <div id="modalWrap" class="modal-wrap" aria-hidden="true" style="display:none">
@@ -710,7 +1175,7 @@ const KEYS_POOL = [
 "HeadsensiFreeV2        https://sfl.gl/4WJrvy    Pw:headsensiv2",
 "WALLHACK_TRAINING_SOCIAL_ISLAND        https://sfl.gl/3ylhocx",
 "HOLO_ORANGE        https://sfl.gl/CwU4", 
-"𝙃𝙊𝙇𝙊𝙁𝙧𝙚𝙚𝙑2-𝘽𝙮𝙙𝙚𝙯𝙯        https://sfl.gl/EeGr",
+"𝙃𝙊𝙇𝙊??𝙧𝙚𝙚𝙑2-𝘽𝙮𝙙𝙚𝙯𝙯        https://sfl.gl/EeGr",
 "𝙃𝙊𝙇𝙊𝙁𝙧𝙚𝙚𝙑1-𝘽𝙮𝙙𝙚𝙯𝙯        https://sfl.gl/aMzLp62I"
 ];
 
@@ -1223,7 +1688,6 @@ showToastBtn.addEventListener('click', ()=>{
   toast.classList.add('show');
   setTimeout(()=> toast.classList.remove('show'), 5000); // popup hilang setelah 5 detik
 });
-
 </script>
 </body>
 </html>
