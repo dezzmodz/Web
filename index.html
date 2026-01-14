@@ -321,6 +321,7 @@ button:hover, .btn:hover {
   font-size:12px;
   font-weight:700;
   text-align:center;
+
   color:#bfffe8;
   border-radius:8px;
   background:rgba(0,255,150,.15);
@@ -449,144 +450,65 @@ button:hover, .btn:hover {
   /* ===============================
    LOGIN OVERLAY ANIMASI
 ================================ */
-.login-overlay {
-  position: fixed;
-  inset: 0;
-  background: linear-gradient(180deg, rgba(0,0,0,0.55), rgba(0,0,0,0.7));
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 9999;
-  opacity: 0;
-  animation: overlayFadeIn 1s forwards;
-}
-
-@keyframes overlayFadeIn {
-  0% { opacity: 0; }
-  100% { opacity: 1; }
-}
-
-.login-card {
-  width: 360px;
-  padding: 18px;
-  border-radius: 14px;
-  background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.02));
-  border: 1px solid rgba(127,255,150,0.06);
-  box-shadow: 0 8px 40px rgba(0,0,0,0.6);
-  backdrop-filter: blur(8px) saturate(1.1);
-  position: relative;
-  overflow: hidden;
-  transform: scale(0.8);
-  opacity: 0;
-  animation: cardPopIn 0.6s forwards 0.3s;
-}
-
-@keyframes cardPopIn {
-  0% { transform: scale(0.8); opacity: 0; }
-  60% { transform: scale(1.05); opacity: 1; }
-  100% { transform: scale(1); opacity: 1; }
-}
-
-.login-card::before {
-  content:"";
-  position:absolute;
+  .login-overlay{
+  position:fixed;
   inset:0;
-  pointer-events:none;
-  background: linear-gradient(90deg, rgba(127,255,150,0.02), rgba(127,255,150,0.005));
-  mix-blend-mode: overlay;
-  animation: shimmer 4s linear infinite;
+  background: rgba(255,255,255,0.85);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  z-index:9999;
 }
 
-@keyframes shimmer {
-  0% { background-position: -200% 0; }
-  100% { background-position: 200% 0; }
+/* card putih */
+.login-card{
+  width:360px;
+  padding:18px;
+  border-radius:14px;
+  background:#ffffff;
+  border:1px solid #e0e0e0;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+  position:relative;
 }
 
-/* Teks tetap normal */
-.login-title {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  color: var(--accent);
-  font-weight: 900;
-  font-size: 15px;
-  margin-bottom: 12px;
+/* hapus efek kaca */
+.login-card::before{
+  display:none;
 }
 
-.glass-input {
-  width: 100%;
-  padding: 12px;
-  border-radius: 10px;
-  border: 1px solid rgba(255,255,255,0.06);
-  background: rgba(0,0,0,0.16);
-  color: var(--accent);
-  box-sizing: border-box;
-  font-weight: 700;
-  margin-bottom: 10px;
-  transition: 0.3s;
+/* title */
+.login-title{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  color:#111;
+  font-weight:700;
 }
 
-.glass-input:focus {
-  outline: none;
-  border-color: var(--accent);
-  box-shadow: 0 0 20px var(--accent), 0 0 40px rgba(125,255,125,0.6);
+/* input putih */
+.glass-input{
+  width:100%;
+  padding:12px;
+  border-radius:8px;
+  border:1px solid #ccc;
+  background:#fff;
+  color:#111;
+  box-sizing:border-box;
+  font-weight:600;
 }
 
-/* ===============================
-   TOMBOL NEON (login & batal)
-================================ */
-.login-btn {
-  width: 100%;
-  padding: 12px;
-  margin-bottom: 8px;
-  border-radius: 10px;
-  border: none;
-  font-weight: 700;
-  cursor: pointer;
-  background: linear-gradient(90deg, #00ffcc, #7dff7d, #00c8ff);
-  color: #000;
-  box-shadow: 0 0 15px rgba(0,255,150,0.6);
-  transition: 0.2s;
-  animation: neonBtnGlow 2s infinite;
+.glass-input:focus{
+  outline:none;
+  border-color:#999;
+  box-shadow:none;
 }
 
-.login-btn:hover {
-  transform: scale(1.05);
-  box-shadow: 0 0 35px rgba(0,255,150,1);
+/* catatan */
+.login-note{
+  font-size:13px;
+  color:#555;
+  margin-top:8px;
 }
-
-.login-btn:active {
-  transform: scale(0.97);
-  box-shadow: 0 0 10px rgba(0,255,150,0.5);
-}
-
-.cancel-btn {
-  background: rgba(0,0,0,0.3);
-  color: #7dff7d;
-  box-shadow: 0 0 10px rgba(125,255,125,0.3);
-}
-
-.cancel-btn:hover {
-  background: rgba(0,0,0,0.5);
-  box-shadow: 0 0 25px rgba(125,255,125,0.6);
-}
-
-@keyframes neonBtnGlow {
-  0%, 100% { box-shadow: 0 0 15px #00ffcc, 0 0 30px #7dff7d; }
-  50% { box-shadow: 0 0 25px #00ffcc, 0 0 50px #7dff7d; }
-}
-
-  /* blinking copy button */
-  .btn-copy { position:relative; overflow:visible; transition:transform .12s ease; box-shadow: 0 8px 30px rgba(125,255,125,0.08); border-radius:10px; font-weight:800 }
-  .btn-copy::after{ content:""; position:absolute; inset:0; border-radius:10px; box-shadow: 0 0 10px rgba(125,255,125,0.45), 0 0 30px rgba(125,255,125,0.25), 0 0 60px rgba(125,255,125,0.06); filter: blur(6px); opacity:0.0; animation: copy-glow 2s linear infinite; pointer-events:none; }
-  @keyframes copy-glow{ 0%{opacity:0}20%{opacity:0.6}50%{opacity:0.95}80%{opacity:0.6}100%{opacity:0} }
-  .btn-copy.blink::after{ animation: copy-glow-fast 0.9s linear infinite; }
-  @keyframes copy-glow-fast{0%{opacity:0}20%{opacity:0.9}50%{opacity:1}80%{opacity:0.9}100%{opacity:0} }
-  .disabled { opacity:0.45; pointer-events:none; filter:grayscale(0.2); }
-
-  .note-strong{font-weight:800;font-size:12px}
-  /* small responsive */
-  @media (max-width:700px){ .card{padding:12px} .key-display{min-height:160px} }
 
   /* ====== NEON STRIKE & BLINK (looping) ====== */
   .neon-strike {
@@ -651,32 +573,26 @@ button:hover, .btn:hover {
   filter: drop-shadow(0 4px 10px rgba(0,255,150,0.35));
   border: 2px solid rgba(0,255,150,0.8);
 }
-<style>
-:root{
-  --bg1:#0b1116;
-  --bg2:#0f1a21;
-  --accent:#7dff7d;
+<sstyle
+
+body{
+  background:#0e0e0e;
+  color:#ffffff;
 }
 
-body::before{
-  content:"";
-  position:fixed;
-  inset:0;
-  z-index-999;
-  background: linear-gradient(
-    120deg,
-    var(--bg1),
-    var(--bg2),
-    var(--accent)
-  );
-  background-size:300% 300%;
-  animation:bgMove 20s ease infinite;
+.login-card,
+.card,
+.toast{
+  background: rgba(255,255,255,0.08);
+  border:1px solid rgba(255,255,255,0.15);
+  color:#ffffff;
 }
 
-@keyframes bgMove{
-  0%{background-position:0% 50%}
-  50%{background-position:100% 50%}
-  100%{background-position:0% 50%}
+button,
+.login-btn,
+.card-btn{
+  background:#ffffff;
+  color:#000000;
 }
 
 #statusBox{
@@ -986,29 +902,7 @@ body::before{
         </div>
       </div>
 
-      <div>
-        <label>𝐌𝐞𝐧𝐮 𝘾𝙊𝙇𝙊𝙍</label>
-        <select id="themeSel" onchange="onThemeChange()">
-          <option value="random">Random</option>
-          <option value="0">Neon Green</option>
-          <option value="1">Neon Purple</option>
-          <option value="2">Matrix Green</option>
-          <option value="3">Blue Ice</option>
-          <option value="4">Red Blood</option>
-          <option value="5">Emerald</option>
-          <option value="6">Pink Neon</option>
-          <option value="7">White Neon</option>
-          <option value="8">Deep Blue</option>
-          <option value="9">Galaxy Purple</option>
-          <option value="10">Orange Fire</option>
-          <option value="11">Yellow Neon</option>
-          <option value="12">Green Neon</option>
-          <option value="13">Steel White</option>
-          <option value="14">Metal Chrome</option>
-          <option value="15">𝘿𝙚𝙯𝙕✘𝙈𝙊𝘿𝙎</option>
-        </select>
-       </div>
-      
+
         <div class="links-grid">
   <a href="https://lynk.id/dezzreal" target="_blank">
     <span>🛒</span> Produk
@@ -1084,7 +978,7 @@ const items = [
     link: "https://wa.me/6281324226894?text=Buy_HOLOGREENxPURPLEV1+V2_5k",
     btnText: "𝘽𝙐𝙔"
   }
-  
+
 ];
 
 const container = document.getElementById('cardContainer');
@@ -1165,7 +1059,7 @@ audio.src = loginMusics[randomIndex];
           <div class="click" onclick="DMTELE()">➩ 𝘾𝙇𝙄𝙆 𝘿𝙈 🜲</div>
         </div>
       </div>
-      
+
       <div style="margin-top:12px">
   <input id="userInput" class="glass-input" type="text" placeholder="⌨︎︎ ᴇɴᴛᴇʀ ᴜsᴇʀɴᴀᴍᴇ" />
 </div>
@@ -1182,7 +1076,7 @@ audio.src = loginMusics[randomIndex];
       <div id="loginMsg" class="small" style="color:#ff6b6b;margin-top:8px;display:none"></div>
     </div>
   </div>
- 
+
 
   <!-- MODAL -->
   <div id="modalWrap" class="modal-wrap" aria-hidden="true" style="display:none">
@@ -1240,7 +1134,6 @@ const keyText = document.getElementById('keyText');
 const progressFill = document.getElementById('progressFill');
 const timeNote = document.getElementById('timeNote');
 const logoutBtn = document.getElementById('logoutBtn');
-const themeSel = document.getElementById('themeSel');
 const modalWrap = document.getElementById('modalWrap');
 const modal = document.getElementById('modal');
 const modalKey = document.getElementById('modalKey');
@@ -1522,21 +1415,12 @@ function randomTheme(){
   applyTheme(t);
 }
 
-function onThemeChange(){
-  const sel = document.getElementById('themeSel').value;
-  if(sel === 'random'){ randomTheme(); return; }
-  const idx = parseInt(sel,10);
-  if(!isNaN(idx) && THEMES[idx]) applyTheme(THEMES[idx]);
-}
 
 window.addEventListener('load', ()=>{
   const idx = Number(localStorage.getItem('dezz_theme_index'));
   if(!isNaN(idx) && THEMES[idx]) applyTheme(THEMES[idx]); else randomTheme();
 });
 
-/* =========================
-   EXPIRY / UI helpers
-*/
 
 /* ========== Expiry / countdown handling ========== */
 function startLocalExpiry(seconds){
